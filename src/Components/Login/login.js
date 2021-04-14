@@ -15,6 +15,7 @@ const Login = () => {
             <label>Nº Teléfono:0
                 <input type="number" onInput={(e) => data.phone = e.target.value } />
             </label>
+            <br></br>
             <button onSubmit={search}>Enviar</button>
             <div> Datos Incorrectos </div>
         </div>
