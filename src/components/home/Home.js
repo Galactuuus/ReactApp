@@ -1,7 +1,11 @@
 
 function Home() {
   return (
-    <div>hola soy home</div>
+    <>
+        <header className="header">Clinica Dental</header>
+        <div>hola soy home</div>
+        <footer className="footer">Hecho por Angel y Gabriel</footer>
+    </>
   );
 }
 
