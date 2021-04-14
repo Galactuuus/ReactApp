@@ -6,7 +6,6 @@ const Login = () => {
     const search = async () => {
 
         await fetch('127.0.0.1:5000/users', { headers: { dni: data.dni, phone: data.phone } });
-        return console.log('f');
     }
     return(
         <div>
