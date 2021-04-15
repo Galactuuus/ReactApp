@@ -1,25 +1,47 @@
+import React, { Component } from 'react';
 import './login.css';
+import Error from '../Error/error.js';
 
-const Login = () => {
 
-    let data = { dni: "", phone: "" }
-    const search = async () => {
+class Login extends Component {
 
-        await fetch('127.0.0.1:5000/users', { headers: { dni: data.dni, phone: data.phone } });
+    constructor(props){
+        super(props)
+
+        this.state = {
+            error: false,
+            dni: "",
+            phone: ""
+        }
     }
-    return(
-        <div>
-            <label>DNI: <br></br>
-                <input type="text" onInput={(e) => data.dni = e.target.value } />
-            </label>
-            <label>Nº Teléfono:0
-                <input type="number" onInput={(e) => data.phone = e.target.value } />
-            </label>
-            <br></br>
-            <button onSubmit={search}>Enviar</button>
-            <div> Datos Incorrectos </div>
-        </div>
-    )
+
+    search = async () => {
+        try {
+            let response = await fetch('http://127.0.0.1:5000/users', { method: 'GET', headers: { dni: this.state.dni, phone:  this.state.phone }});
+            response = await response.json();
+        } catch {
+            this.setState({ error: true })
+        }
+    }
+
+    render() {
+        return(
+            <div>
+                {this.state.error  && <Error msg='DNI o Contraseña erroneas'/>}
+                <label>DNI: 
+                    <br></br>
+                    <input type="text" onInput={(e) => this.setState({ dni: e.target.value})} />
+                </label> 
+                <br></br>
+                <label>Nº Teléfono: 
+                    <br></br>
+                    <input type="number" onInput={(e) => this.setState( { phone: e.target.value }) } />
+                </label>
+                <br></br>
+                <button onClick={this.search}>Enviar</button>
+            </div>
+        )  
+    }
 }
 
 export default Login;
