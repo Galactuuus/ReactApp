@@ -1,3 +1,49 @@
 .header{
+    height: 4em;
+    display: flex;
     background-color: aqua;
+    color: goldenrod;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttons {
+    width: 15em;
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+img{
+    height: 3em;
+    width: 3em;
+}
+
+.signin {
+    border: 2px solid gold;
+    border-radius: 2em;
+    background-color: white;
+    height: 2em;
+    width: 8em;
+    transition: 1s ease;
+}
+
+.signup {
+    border: 2px solid gold;
+    border-radius: 2em;
+    background-color: white;
+    height: 2em;
+    width: 8em;
+    transition: 1s ease;
+}
+
+.signin:hover{
+    transition: 1s ease;
+    background-color: gold;
+}
+
+.signup:hover{
+    transition: 1s ease;
+    background-color: gold;
 }

@@ -1,0 +1,13 @@
+#submit {
+  border: 1px solid aqua;
+  background-color: white;
+  width: 5em;
+  height: 2em;
+  border-radius: 2em;
+  transition: 1s ease;
+}
+
+#submit:hover { 
+  transition: 1s ease;
+  background-color: aqua;
+}
