@@ -3,7 +3,7 @@ import './SignIn.scss';
 import Error from '../Error/Error.js';
 import ApiConsumer from '../../Util/ApiConsumer.js';
 
-class Login extends Component {
+class SignIn extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -64,4 +64,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default SignIn;

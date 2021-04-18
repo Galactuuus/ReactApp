@@ -1,5 +1,5 @@
 import React from 'react';    
-import Login from '../../Components/Login/Login.js'
+import SignIn from '../../Components/SignIn/SignIn.js'
 import SignUp from '../../Components/SignUp/SignUp.js';     
 import AllDating from '../../Components/AllDating/AllDating.js'; 
 import NewDating from '../../Components/NewDating/NewDating.js'
@@ -11,7 +11,7 @@ const Content = () => {
         <>
             <br></br>
             <br></br>
-            <Login></Login>
+            <SignIn></SignIn>
             <br></br>
             <br></br>
             <br></br>
