@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './Login.css';
+import './SignIn.scss';
 import Error from '../Error/Error.js';
 import ApiConsumer from '../../Util/ApiConsumer.js';
 
-class Login extends Component {
+class SignIn extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -38,28 +38,30 @@ class Login extends Component {
   
   render() {
     return(
-      <>        
-        <form onSubmit={this.handleSubmit}>
+      <div className="formContainer">        
+        <form className="loginForm" onSubmit={this.handleSubmit}>
           <label>Login</label>
           <br/>
           <label>
               Dni:
+              <br/>
               <input type="text" value={this.state.dni}
                 name="dni" onChange={this.handleChange}/>
           </label>
           <br/>
           <label>
               Phone:
+              <br/>
               <input type="text" value={this.state.phone}
                 name="phone" onChange={this.handleChange}/>
           </label>   
           <br/>       
-          <input type="submit" value="Submit"/>
+          <input id="submit" type="submit" value="Enviar"/>
         </form>
         {this.state.error  && <Error msg={this.state.error}/>}
-    </>
+    </div>
     )  
   }
 }
 
-export default Login;
+export default SignIn;

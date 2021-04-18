@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './SingIn.css';
+import './SignUp.scss';
 import Error from '../Error/Error.js';
 import ApiConsumer from '../../Util/ApiConsumer.js';
 
-class SingIn extends Component {
+class SingUp extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -46,46 +46,51 @@ class SingIn extends Component {
   
   render() {
     return(
-      <>        
-        <form onSubmit={this.handleSubmit}>
-          <label>SingIn</label>
+      <div className="formContainer">        
+        <form className="loginForm" onSubmit={this.handleSubmit}>
+          <label>SingUp</label>
           <br/>
           <label>
               Dni:
+              <br/>
               <input type="text" value={this.state.dni}
                 name="dni" onChange={this.handleChange}/>
           </label>
           <br/>
           <label>
               Phone:
+              <br/>
               <input type="text" value={this.state.phone}
                 name="phone" onChange={this.handleChange}/>
           </label>
           <br/>
           <label>
               name:
+              <br/>
               <input type="text" value={this.state.name}
                 name="name" onChange={this.handleChange}/>
           </label>
           <br/>
           <label>
               lastname:
+              <br/>
               <input type="text" value={this.state.lastname}
                 name="lastname" onChange={this.handleChange}/>
           </label>
           <br/>
           <label>
               history:
+              <br/>
               <input type="text" value={this.state.history}
                 name="history" onChange={this.handleChange}/>
           </label>
           <br/>
-          <input type="submit" value="Submit"/>
+          <input id="submit" type="submit" value="Enviar"/>
         </form>
         {this.state.error  && <Error msg={this.state.error}/>}
-    </>
+    </div>
     )  
   }
 }
 
-export default SingIn;
+export default SingUp;
