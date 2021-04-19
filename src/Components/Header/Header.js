@@ -12,11 +12,12 @@ function Header() {
   const history = useHistory();
   let [Logged, setLogged] = useState();
 
-  useEffect(() => {
+
+  const HeaderLogic = () => {
     if(Cookies.get('auth')) { Logged = true }
     else { Logged = false; }
-    console.log(Logged);
-  }, [])
+    return Logged ? <HeaderNav/> : <HeaderForm/>;
+  }
 
   const homeRedirect = () => {
     history.push('/');
@@ -25,8 +26,7 @@ function Header() {
   return (
     <header className="header">
       <img src="https://i.pinimg.com/originals/bb/d4/8a/bbd48a94f349aa9687d0b6a2b55d2c67.png" onClick={homeRedirect}></img>
-      {!Logged && <HeaderForm/>}
-      {Logged &&  <HeaderNav/>}
+      <HeaderLogic/>
     </header>
   );
 }
