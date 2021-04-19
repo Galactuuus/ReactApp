@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './SignIn.scss';
 import Error from '../Error/Error.js';
 import ApiConsumer from '../../Util/ApiConsumer.js';
+import { Link, withRouter } from 'react-router-dom';
+import Header from '../Header/Header';
 
 class SignIn extends Component {
   constructor(props){
@@ -16,7 +18,9 @@ class SignIn extends Component {
     e.preventDefault();
     try {
       let response= await ApiConsumer.login(this.state.dni, this.state.phone);
-      console.log(response);
+      let newCookie = 'auth' + '=' + response.auth;
+      document.cookie = newCookie;
+      this.props.history.push({pathname: '/', state: { Logged: true}})
       if (response.error){
           this.setState({ error: response.error });  
       }else{
@@ -35,33 +39,39 @@ class SignIn extends Component {
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value});
   };
+
+  
   
   render() {
     return(
-      <div className="formContainer">        
-        <form className="loginForm" onSubmit={this.handleSubmit}>
-          <label>Login</label>
-          <br/>
-          <label>
-              Dni:
-              <br/>
-              <input type="text" value={this.state.dni}
-                name="dni" onChange={this.handleChange}/>
-          </label>
-          <br/>
-          <label>
-              Phone:
-              <br/>
-              <input type="text" value={this.state.phone}
-                name="phone" onChange={this.handleChange}/>
-          </label>   
-          <br/>       
-          <input id="submit" type="submit" value="Enviar"/>
-        </form>
-        {this.state.error  && <Error msg={this.state.error}/>}
-    </div>
+      <>
+        <Header/>
+        <div className="formContainer"> 
+          {this.state.error  && <Error msg={this.state.error}/>}       
+          <form className="loginForm" onSubmit={this.handleSubmit}>
+            <label>Login</label>
+            <br/>
+            <label>
+                Dni:
+                <br/>
+                <input type="text" value={this.state.dni}
+                  name="dni" onChange={this.handleChange}/>
+            </label>
+            <br/>
+            <label>
+                Phone:
+                <br/>
+                <input type="text" value={this.state.phone}
+                  name="phone" onChange={this.handleChange}/>
+            </label>   
+            <br/>       
+            <input id="submit" type="submit" value="Enviar"/>
+            <h4 className="registerinsingin">¿Estas registrado? Si no lo estás <Link to="/signup"> regístrate</Link></h4>
+          </form>
+        </div>
+      </>
     )  
   }
 }
 
-export default SignIn;
+export default withRouter(SignIn);

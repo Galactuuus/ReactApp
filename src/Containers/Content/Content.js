@@ -9,14 +9,6 @@ const Content = () => {
 
     return (
         <>
-            <br></br>
-            <br></br>
-            <SignIn></SignIn>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <SignUp></SignUp>
             <AllDating></AllDating>
             <NewDating></NewDating>
             <UserDating></UserDating>
