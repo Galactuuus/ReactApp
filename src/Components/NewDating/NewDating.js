@@ -21,7 +21,7 @@ class NewDating extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let response= await ApiConsumer.create(
+      let response= await ApiConsumer.createDating(
           this.state.date, 
           this.state.userID,
           this.state.doctorID,

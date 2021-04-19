@@ -10,6 +10,7 @@ function Home() {
     <>
         <Header></Header>
         <Content></Content>
+        <br/><br/>
         <Footer></Footer>
     </>
   );

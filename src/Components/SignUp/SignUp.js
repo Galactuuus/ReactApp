@@ -21,7 +21,7 @@ class SignUp extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let response = await ApiConsumer.create(
+      let response = await ApiConsumer.createUser(
           this.state.dni, 
           this.state.phone,
           this.state.name,

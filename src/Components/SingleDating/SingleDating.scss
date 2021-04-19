@@ -1,0 +1,38 @@
+.datingContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(40, 40, 40);
+    align-items: center;
+}
+.singleDate {
+    border: 2px solid aqua;
+    background-color: white;
+    border-radius: 2em;
+    padding: 1em;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-around;
+}
+.fields {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-around;
+}
+.titulo{
+    font-weight: bolder;
+}
+@media (max-width: 800px) {
+    .fields {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: space-around;
+    }
+}
