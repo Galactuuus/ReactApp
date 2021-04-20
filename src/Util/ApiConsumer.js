@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 const ApiConsumer = {
     login : async (dni, phone) => {
         let response = await fetch('http://127.0.0.1:5000/users', 
@@ -16,28 +18,83 @@ const ApiConsumer = {
             createdAt: fecha.toISOString().slice(0, 10),
             updatedAt: fecha.toISOString().slice(0, 10)
         };
-        let response = await fetch('http://127.0.0.1:5000/users', 
-            { method: 'POST', 
-                body: JSON.stringify(userdata),
-                headers:{'Content-Type': 'application/json'}});
+        let response = await fetch('http://127.0.0.1:5000/users', { 
+            method: 'POST', 
+            body: JSON.stringify(userdata),
+            headers:{'Content-Type': 'application/json'}
+        });
         response = await response.json();
         return response;
     },
-    createDating: async (date,userID,doctorID,status,detail) => {
-        const fecha = new Date();
-        const userdata = {
-            date: date, 
-            userID: userID,
-            doctorID: doctorID,
-            status: status,
-            detail: detail,
-            createdAt: fecha.toISOString().slice(0, 10),
-            updatedAt: fecha.toISOString().slice(0, 10)
-        };
-        let response = await fetch('http://127.0.0.1:5000/datings', 
-            { method: 'POST', 
-                body: JSON.stringify(userdata),
-                headers:{'Content-Type': 'application/json'}});
+    allDating: async () => {
+        const token = Cookies.get('auth');
+
+        let response = await fetch('http://127.0.0.1:5000/datings/pro', {
+            method: 'GET',
+            headers: {
+                'auth': token
+            }
+        });
+        response = await response.json();
+        return response;
+    },
+    userDating: async () => {
+        const token = Cookies.get('auth');
+
+        let response = await fetch('http://127.0.0.1:5000/users/mydates', {
+            method: 'GET',
+            headers: {
+                'auth': token
+            }
+        });
+        response = await response.json();
+        return response;
+    },
+    adminValidation: async () => {
+        const token = Cookies.get('auth');
+        let response = await fetch('http://127.0.0.1:5000/users/profile', {
+            method: 'GET',
+            headers: {
+                'auth': token
+            }
+        });
+        response = await response.json();
+        return response;
+    },
+    createDating: async (date, userId, doctorId) => {
+        const userData = {
+            date: date,
+            userID: userId,
+            doctorID: doctorId,
+        }   
+        let response = await fetch('http://127.0.0.1:5000/datings', {
+        method: 'POST',
+        body: JSON.stringify({
+            date: date,
+            userID: userId,
+            doctorID: doctorId
+        }),
+        headers:{'Content-Type': 'application/json'}
+        })
+        response = response.json();
+        return response;
+    },
+    listDoctors: async () => {
+        let response = await fetch('http://127.0.0.1:5000/doctors', {
+            method: 'GET',
+        });
+        response = await response.json();
+        return response;
+    },
+    cancel: async (id) => {
+        let response = await fetch('http://127.0.0.1:5000/datings', {
+            method: 'PATCH',
+            body: JSON.stringify({
+                id: id,
+                status: "Cancelada"
+            }),
+            headers:{'Content-Type': 'application/json'}
+        });
         response = await response.json();
         return response;
     }

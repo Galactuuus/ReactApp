@@ -1,36 +1,51 @@
 import SingleDating from '../SingleDating/SingleDating';
 import './UserDating.css';
+import ApiConsumer from '../../Util/ApiConsumer.js';
+import { useEffect, useState } from 'react';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
-function UserDating() {
-  const citasUsuario = [
-    {
-      date:"2020/02/02",
-      dni:"123c",
-      doctor:3,
-      status: "programada",
-      detail: "ortodoncia"
-    },
-    {
-      date:"2020/03/02",
-      dni:"123c",
-      doctor:1,
-      status: "programada",
-      detail: "limpieza"
-    }
-  ];
+const UserDating = () => {
+  let [citas, setCitas] = useState([]);
+  let [cancelledDating, setCancelledDating] = useState(false)
+  let citasProgramadas = [];
+  
+  useEffect(async () => {
+    
+    citas = await ApiConsumer.userDating();
+    citas.map(cita => {
+      if(cita.status === 'Programada') citasProgramadas.push(cita);
+    })
+    setCitas(citasProgramadas);
+
+  },[])
+
+  useEffect(async () => {
+    
+    citas = await ApiConsumer.userDating();
+    citas.map(cita => {
+      if(cita.status === 'Programada') citasProgramadas.push(cita);
+    })
+    setCitas(citasProgramadas);
+    setCancelledDating(false); 
+  },[cancelledDating])
+
   return (
     <>
-    <span className="titulo">User Dating</span>
-    {citasUsuario.map((cita,index)=>{
-      return (<SingleDating 
-      id={index} 
-      date={cita.date}
-      dni= {cita.dni} 
-      doctorID= {cita.doctor}
-      status= {cita.status}
-      detail= {cita.detail}
-      />);
-    })}
+      <Header/>
+      <span className="titulo">User Dating</span>
+      {citas.map((cita)=>{
+        return (<SingleDating 
+          id={cita.id}
+          date={cita.date}
+          dni= {cita.userID} 
+          doctorID= {cita.doctorID}
+          status= {cita.status}
+          detail= {cita.detail}
+          setCancelledDating={setCancelledDating}
+        />);
+      })}
+      <Footer/>
     </>
   );
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './SignUp.scss';
 import Error from '../Error/Error.js';
 import ApiConsumer from '../../Util/ApiConsumer.js';
-import { Link,withRouter } from 'react-router-dom';
+import { Link,withRouter, useHistory } from 'react-router-dom';
 import Header from '../Header/Header';
 
 
@@ -22,19 +22,18 @@ class SignUp extends Component {
     e.preventDefault();
     try {
       let response = await ApiConsumer.createUser(
-          this.state.dni, 
-          this.state.phone,
-          this.state.name,
-          this.state.lastname,
-          this.state.history);
-      console.log(response);
+        this.state.dni, 
+        this.state.phone,
+        this.state.name,
+        this.state.lastname,
+        this.state.history);
       if (response.error){
-          this.setState({ error: response.error });  
+        this.setState({ error: response.error });  
       }else{
-          this.setState({ error: null });
+        this.setState({ error: null });
+        this.props.history.push('/signin');   
       }
     } catch(e) {
-        console.log(e);
         if(e.message === "Failed to fetch") {
             this.setState({ error: "Ha ocurrido un error de conexión"});
         }else{
