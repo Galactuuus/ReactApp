@@ -7,11 +7,29 @@ import Footer from '../Footer/Footer';
 
 const UserDating = () => {
   let [citas, setCitas] = useState([]);
+  let [cancelledDating, setCancelledDating] = useState(false)
+  let citasProgramadas = [];
+  
+  useEffect(async () => {
+    
+    citas = await ApiConsumer.userDating();
+    citas.map(cita => {
+      if(cita.status === 'Programada') citasProgramadas.push(cita);
+    })
+    setCitas(citasProgramadas);
+
+  },[])
 
   useEffect(async () => {
+    
     citas = await ApiConsumer.userDating();
-    setCitas(citas);
-  },[])
+    citas.map(cita => {
+      if(cita.status === 'Programada') citasProgramadas.push(cita);
+    })
+    setCitas(citasProgramadas);
+    setCancelledDating(false); 
+  },[cancelledDating])
+
   return (
     <>
       <Header/>
@@ -24,6 +42,7 @@ const UserDating = () => {
           doctorID= {cita.doctorID}
           status= {cita.status}
           detail= {cita.detail}
+          setCancelledDating={setCancelledDating}
         />);
       })}
       <Footer/>
