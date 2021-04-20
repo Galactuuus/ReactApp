@@ -7,7 +7,7 @@ const ApiConsumer = {
         response = await response.json();
         return response;
     },
-    create: async (userdni,userphone,username,userlastname,userhistory) => {
+    createUser: async (userdni,userphone,username,userlastname,userhistory) => {
         const fecha = new Date();
         const userdata = {
             dni: userdni, 
@@ -35,6 +35,7 @@ const ApiConsumer = {
             }
         });
         response = response.json();
+        console.log(response);
         return response;
     },
     userDating: async () => {
@@ -47,6 +48,7 @@ const ApiConsumer = {
             }
         });
         response = response.json();
+        console.log(response);
         return response;
     }
 }

@@ -5,7 +5,6 @@ import Content from '../Content/Content.js'
 import { useHistory } from 'react-router';
 
 function Home() {
-  const history = useHistory();
   return (
     <>
         <Header></Header>

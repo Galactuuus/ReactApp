@@ -7,7 +7,7 @@ const HeaderNav = () => {
 
     const logout = () => {
         Cookies.remove('auth');
-        history.push({ pathname: '/', state: {Logged: false }});
+        history.push('/');
     }
     return(
         <div>

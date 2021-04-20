@@ -4,7 +4,7 @@ function Footer() {
   return (
     <footer>
       <div className="footer">
-        Hola loko
+        Hecho por Angel y Gabriel
       </div>
     </footer>
   );
