@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Error from '../Error/Error.js';
 import ApiConsumer from '../../Util/ApiConsumer.js';
 import {withRouter} from "react-router-dom";
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 
 
 
@@ -49,49 +51,53 @@ class NewDating extends Component {
   
   render() {
     return(
-      <div className="formContainer">        
-        <form className="datingForm" onSubmit={this.handleSubmit}>
-          <label>New date</label>
-          <br/>
-          <label>
-              Date:
-              <br/>
-              <input type="date" value={this.state.date}
-                name="date" onChange={this.handleChange}/>
-          </label>
-          <br/>
-          <label>
-              Dni:
-              <br/>
-              <input type="text" value={this.state.userID}
-                name="userID" onChange={this.handleChange}/>
-          </label>
-          <br/>
-          <label>
-              Doctor id:
-              <br/>
-              <input type="text" value={this.state.doctorID}
-                name="doctorID" onChange={this.handleChange}/>
-          </label>
-          <br/>
-          <label>
-              Status:
-              <br/>
-              <input type="text" value={this.state.status}
-                name="status" onChange={this.handleChange}/>
-          </label>
-          <br/>
-          <label>
-            Detail:
-              <br/>
-              <input type="text" value={this.state.detail}
-                name="detail" onChange={this.handleChange}/>
-          </label>
-          <br/><br/>
-          <input id="submit" type="submit" value="Enviar"/>
-        </form>
-        {this.state.error  && <Error msg={this.state.error}/>}
-    </div>
+      <>
+      <Header/>
+        <div className="formContainer">        
+          <form className="datingForm" onSubmit={this.handleSubmit}>
+            <label>New date</label>
+            <br/>
+            <label>
+                Date:
+                <br/>
+                <input type="date" value={this.state.date}
+                  name="date" onChange={this.handleChange}/>
+            </label>
+            <br/>
+            <label>
+                Dni:
+                <br/>
+                <input type="text" value={this.state.userID}
+                  name="userID" onChange={this.handleChange}/>
+            </label>
+            <br/>
+            <label>
+                Doctor id:
+                <br/>
+                <input type="text" value={this.state.doctorID}
+                  name="doctorID" onChange={this.handleChange}/>
+            </label>
+            <br/>
+            <label>
+                Status:
+                <br/>
+                <input type="text" value={this.state.status}
+                  name="status" onChange={this.handleChange}/>
+            </label>
+            <br/>
+            <label>
+              Detail:
+                <br/>
+                <input type="text" value={this.state.detail}
+                  name="detail" onChange={this.handleChange}/>
+            </label>
+            <br/><br/>
+            <input id="submit" type="submit" value="Enviar"/>
+          </form>
+          {this.state.error  && <Error msg={this.state.error}/>}
+      </div>
+      <Footer/>
+    </>
     )  
   }
 }

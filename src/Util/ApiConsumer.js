@@ -34,8 +34,7 @@ const ApiConsumer = {
                 'auth': token
             }
         });
-        response = response.json();
-        console.log(response);
+        response = await response.json();
         return response;
     },
     userDating: async () => {
@@ -47,8 +46,7 @@ const ApiConsumer = {
                 'auth': token
             }
         });
-        response = response.json();
-        console.log(response);
+        response = await response.json();
         return response;
     }
 }
