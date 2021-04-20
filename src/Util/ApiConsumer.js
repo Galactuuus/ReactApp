@@ -26,6 +26,25 @@ const ApiConsumer = {
         response = await response.json();
         return response;
     },
+    createDating: async (date,dni,doctorID,status,detail) => {
+        const fecha = new Date();
+        const datingdata = {
+            date: date, 
+            userID: dni,
+            doctorID: doctorID,
+            status: status,
+            detail: detail,
+            createdAt: fecha.toISOString().slice(0, 10),
+            updatedAt: fecha.toISOString().slice(0, 10)
+        };
+        let response = await fetch('http://127.0.0.1:5000/datings', { 
+            method: 'POST', 
+            body: JSON.stringify(datingdata),
+            headers:{'Content-Type': 'application/json'}
+        });
+        response = await response.json();
+        return response;
+    },
     allDating: async () => {
         const token = Cookies.get('auth');
 

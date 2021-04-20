@@ -13,19 +13,22 @@ class NewDating extends Component {
       error:"",
       date:"",
       userID:"",
-      doctorID:[],
+      doctorID:"",
       status: "Programado",
-      detail: ""
+      detail: "",
+      doctores:[]
     }
+    this.handleSelect = this.handleSelect.bind(this);
+
   }
 
   async componentDidMount() {
-
     let docArray = [];   
     docArray = await ApiConsumer.listDoctors();
     console.log(docArray)
-    this.setState({ doctorID: docArray});  
-  }
+    this.setState({ doctores: docArray});  
+  }  
+  
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -39,7 +42,7 @@ class NewDating extends Component {
       if (response.error){
           this.setState({ error: response.error });  
       }else{
-          this.setState({ error: null });
+          this.setState({ error: response.res });
       }
     } catch(e) {
         console.log(e);
@@ -53,6 +56,11 @@ class NewDating extends Component {
 
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value});
+  };
+
+  handleSelect = (e) => {
+    this.setState({doctorID: e.target.value});
+    console.log(this.state.doctorID);
   };
   
   render() {
@@ -80,10 +88,10 @@ class NewDating extends Component {
             <label>
                 Doctor id:
                 <br/>
-                <select name="doctorID" onChange={this.handleChange} >
-                  {this.state.doctorID.map((doc)=>{
+                <select value={this.state.doctorID} name="doctorID" onChange={this.handleSelect} >
+                  {this.state.doctores.map((doc, index)=>{
                     return(
-                      <option value={doc.id}>{doc.name}</option>
+                      <option key={index} value={doc.id}>{doc.name}</option>
                     )
                   })}
                 </select >
@@ -94,7 +102,7 @@ class NewDating extends Component {
                 Status:
                 <br/>
                 <input type="text" value="Programado"
-                  name="status" enable="false" readOnly="true"/>
+                  name="status" enable="false" readOnly={true}/>
             </label>
             <br/>
             <label>
