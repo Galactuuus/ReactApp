@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import { Link } from "react-router-dom";
 import ApiConsumer from "../../Util/ApiConsumer";
 import { useState, useEffect } from "react";
+import './HeaderNav.scss'
 
 const HeaderNav = () => {
     const history = useHistory();
@@ -15,13 +16,23 @@ const HeaderNav = () => {
 
     const nav = [(
         <>
-            <Link className="linksNav" to="/newdate">Nueva Cita</Link>
-            <Link className="linksNav" to="/datings">Todas las citas</Link>
-            <Link className="linksNav" to="/mydates">Mis citas</Link>
+            <div className="enlace">
+            <Link className="linksNav" activeClassName="activo" to="/newdate">Nueva Cita</Link>
+            </div>
+            <div className="enlace">
+            <Link className="linksNav" activeClassName="activo" to="/datings">Todas las citas</Link>
+            </div>
+            <div className="enlace">
+            <Link className="linksNav" activeClassName="activo" to="/mydates">Mis citas</Link>
+            </div>
         </>),(
         <>
-            <Link className="linksNav" to="/newdate">Nueva Cita</Link>
-            <Link className="linksNav" to="/mydates">Mis citas</Link>
+            <div className="enlace">
+            <Link className="linksNav" activeClassName="activo" to="/newdate">Nueva Cita</Link>
+            </div>
+            <div className="enlace">
+            <Link className="linksNav" activeClassName="activo" to="/mydates">Mis citas</Link>
+            </div>
         </>)
     ];
 
@@ -32,11 +43,14 @@ const HeaderNav = () => {
     }, []);
 
     return(
-        <div>
-            {navAdmin && nav[0]}
-            {!navAdmin && nav[1]}
-
-            <button onClick={logout}>Logout</button>
+        <div className="contenedorNavegacion">
+            <div className="barraNavegacion">
+                {navAdmin && nav[0]}
+                {!navAdmin && nav[1]}
+            </div>
+            <div>
+                <button onClick={logout}>Logout</button>
+            </div>            
         </div>
     )
 }
