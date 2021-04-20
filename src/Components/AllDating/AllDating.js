@@ -9,13 +9,18 @@ import { useEffect, useState } from 'react';
 const AllDating = () => {
 
   let [citas, setCitas] = useState([]);
+  let [cancelledDating, setCancelledDating] = useState(false)
 
   useEffect(async () => {
     citas = await ApiConsumer.allDating();
     setCitas(citas);
-    console.log(citas);
   },[])
   
+  useEffect(async () => {
+    citas = await ApiConsumer.allDating();
+    setCitas(citas);
+    setCancelledDating(false);
+  }, [cancelledDating])
   
     
   return (
@@ -24,12 +29,13 @@ const AllDating = () => {
       <span className="titulo">All Dating</span>  
       {citas.map((cita)=>{ 
         return (<SingleDating 
-        id={cita.NumCita}
-        date={cita.FechaCita}
-        dni= {cita.DNI} 
-        doctorID= {cita.Doctor}
-        status= {cita.Estado}
-        detail= {cita.DetalleCita}
+          id={cita.id}
+          date={cita.date}
+          dni= {cita.userID} 
+          doctorID= {cita.doctorID}
+          status= {cita.status}
+          detail= {cita.detail}
+          setCancelledDating={setCancelledDating}
         />);
       })}
       <Footer/>

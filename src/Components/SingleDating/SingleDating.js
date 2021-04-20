@@ -1,6 +1,12 @@
+import ApiConsumer from '../../Util/ApiConsumer';
 import './SingleDating.scss';
 
 function SingleDating(props) {
+
+    const cancelate = async () =>{
+       await ApiConsumer.cancel(props.id);
+       props.setCancelledDating(true);
+    }
     return(
         <div className="datingContainer" key={props.id}>   
         <br/>
@@ -28,6 +34,7 @@ function SingleDating(props) {
                 Detail: <label>{props.detail}</label>
                 </label>                
                 </div>
+                <button onClick={cancelate}>Cancelar</button>
             </div>
             <br/>
       </div>

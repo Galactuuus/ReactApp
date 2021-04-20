@@ -18,17 +18,18 @@ const ApiConsumer = {
             createdAt: fecha.toISOString().slice(0, 10),
             updatedAt: fecha.toISOString().slice(0, 10)
         };
-        let response = await fetch('http://127.0.0.1:5000/users', 
-            { method: 'POST', 
-                body: JSON.stringify(userdata),
-                headers:{'Content-Type': 'application/json'}});
+        let response = await fetch('http://127.0.0.1:5000/users', { 
+            method: 'POST', 
+            body: JSON.stringify(userdata),
+            headers:{'Content-Type': 'application/json'}
+        });
         response = await response.json();
         return response;
     },
     allDating: async () => {
         const token = Cookies.get('auth');
 
-        let response = await fetch('http://127.0.0.1:5000/datings', {
+        let response = await fetch('http://127.0.0.1:5000/datings/pro', {
             method: 'GET',
             headers: {
                 'auth': token
@@ -67,6 +68,18 @@ const ApiConsumer = {
             headers: {
                 'auth': token
             }
+        });
+        response = await response.json();
+        return response;
+    },
+    cancel: async (id) => {
+        let response = await fetch('http://127.0.0.1:5000/datings', {
+            method: 'PATCH',
+            body: JSON.stringify({
+                id: id,
+                status: "Cancelada"
+            }),
+            headers:{'Content-Type': 'application/json'}
         });
         response = await response.json();
         return response;
