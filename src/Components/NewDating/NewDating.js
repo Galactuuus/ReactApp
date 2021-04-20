@@ -13,18 +13,34 @@ class NewDating extends Component {
       error:"",
       date:"",
       userID:"",
+<<<<<<< HEAD
       doctorArray:[],
       status: "Programada",
       detail: "",
       doctorID: 0
+=======
+      doctorID:"",
+      status: "Programado",
+      detail: "",
+      doctores:[]
+>>>>>>> af8c3812412abeddb65963590e36ca73979c4f23
     }
+    this.handleSelect = this.handleSelect.bind(this);
+
   }
 
   async componentDidMount() {
     let docArray = [];   
     docArray = await ApiConsumer.listDoctors();
+<<<<<<< HEAD
     this.setState({ doctorArray: docArray}); 
   }
+=======
+    console.log(docArray)
+    this.setState({ doctores: docArray});  
+  }  
+  
+>>>>>>> af8c3812412abeddb65963590e36ca73979c4f23
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -35,8 +51,12 @@ class NewDating extends Component {
       if (response.error){
           this.setState({ error: response.error });  
       }else{
+<<<<<<< HEAD
           this.setState({ error: null });
           this.props.history.push('/');
+=======
+          this.setState({ error: response.res });
+>>>>>>> af8c3812412abeddb65963590e36ca73979c4f23
       }
     } catch(e) {
         console.log(e);
@@ -51,9 +71,17 @@ class NewDating extends Component {
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value});
   };
+<<<<<<< HEAD
   handlePuto = (e) => {
     this.setState({ doctorID: e.target.value});
   }
+=======
+
+  handleSelect = (e) => {
+    this.setState({doctorID: e.target.value});
+    console.log(this.state.doctorID);
+  };
+>>>>>>> af8c3812412abeddb65963590e36ca73979c4f23
   
   render() {
     return(
@@ -80,6 +108,7 @@ class NewDating extends Component {
             <label>
                 Doctores:
                 <br/>
+<<<<<<< HEAD
                 <select name="doctorID" onChange={this.handlePuto} id="doctors">
                   {
                     this.state.doctorArray.map(doc =>  <option value={doc.id} >{doc.name + ' ' + doc.lastname}</option> )
@@ -87,6 +116,32 @@ class NewDating extends Component {
                 </select>
             </label>
             <br/>
+=======
+                <select value={this.state.doctorID} name="doctorID" onChange={this.handleSelect} >
+                  {this.state.doctores.map((doc, index)=>{
+                    return(
+                      <option key={index} value={doc.id}>{doc.name}</option>
+                    )
+                  })}
+                </select >
+
+            </label>
+            <br/>
+            <label>
+                Status:
+                <br/>
+                <input type="text" value="Programado"
+                  name="status" enable="false" readOnly={true}/>
+            </label>
+            <br/>
+            <label>
+              Detail:
+                <br/>
+                <input type="text" value={this.state.detail}
+                  name="detail" onChange={this.handleChange}/>
+            </label>
+            <br/><br/>
+>>>>>>> af8c3812412abeddb65963590e36ca73979c4f23
             <input id="submit" type="submit" value="Enviar"/>
           </form>
           {this.state.error  && <Error msg={this.state.error}/>}

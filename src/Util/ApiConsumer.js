@@ -62,7 +62,6 @@ const ApiConsumer = {
         return response;
     },
     createDating: async (date, userId, doctorId) => {
-        console.log(date);
         const userData = {
             date: date,
             userID: userId,
@@ -77,8 +76,8 @@ const ApiConsumer = {
         }),
         headers:{'Content-Type': 'application/json'}
         })
-        console.log(response);
-        if(response.ok) return response;
+        response = response.json();
+        return response;
     },
     listDoctors: async () => {
         let response = await fetch('http://127.0.0.1:5000/doctors', {
