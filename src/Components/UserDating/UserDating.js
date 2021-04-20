@@ -11,8 +11,6 @@ const UserDating = () => {
   useEffect(async () => {
     citas = await ApiConsumer.userDating();
     setCitas(citas);
-    console.log(citas);
-
   },[])
   return (
     <>

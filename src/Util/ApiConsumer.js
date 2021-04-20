@@ -48,6 +48,17 @@ const ApiConsumer = {
         });
         response = await response.json();
         return response;
+    },
+    adminValidation: async () => {
+        const token = Cookies.get('auth');
+        let response = await fetch('http://127.0.0.1:5000/users/profile', {
+            method: 'GET',
+            headers: {
+                'auth': token
+            }
+        });
+        response = await response.json();
+        return response;
     }
 }
 
