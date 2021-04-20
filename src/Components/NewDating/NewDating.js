@@ -13,18 +13,17 @@ class NewDating extends Component {
       error:"",
       date:"",
       userID:"",
-      doctorID:[],
-      status: "Programado",
-      detail: ""
+      doctorArray:[],
+      status: "Programada",
+      detail: "",
+      doctorID: 0
     }
   }
 
   async componentDidMount() {
-
     let docArray = [];   
     docArray = await ApiConsumer.listDoctors();
-    console.log(docArray)
-    this.setState({ doctorID: docArray});  
+    this.setState({ doctorArray: docArray}); 
   }
   handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,14 +31,12 @@ class NewDating extends Component {
       let response= await ApiConsumer.createDating(
           this.state.date, 
           this.state.userID,
-          this.state.doctorID,
-          this.state.status,
-          this.state.detail);
-      console.log(response);
+          this.state.doctorID);
       if (response.error){
           this.setState({ error: response.error });  
       }else{
           this.setState({ error: null });
+          this.props.history.push('/');
       }
     } catch(e) {
         console.log(e);
@@ -54,6 +51,9 @@ class NewDating extends Component {
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value});
   };
+  handlePuto = (e) => {
+    this.setState({ doctorID: e.target.value});
+  }
   
   render() {
     return(
@@ -67,7 +67,7 @@ class NewDating extends Component {
                 Date:
                 <br/>
                 <input type="date" value={this.state.date}
-                  name="date" onChange={this.handleChange}/>
+                  name="date" onChange={(e) => this.setState({date: e.target.value})}/>
             </label>
             <br/>
             <label>
@@ -78,33 +78,15 @@ class NewDating extends Component {
             </label>
             <br/>
             <label>
-                Doctor id:
+                Doctores:
                 <br/>
-                <select name="cars" id="cars">
-  
-                {this.state.doctorID.map((doc)=>{
-                  return(
-                    <option value={doc.id}>{doc.name}</option>
-                  )
-                })}
+                <select name="doctorID" onChange={this.handlePuto} id="doctors">
+                  {
+                    this.state.doctorArray.map(doc =>  <option value={doc.id} >{doc.name + ' ' + doc.lastname}</option> )
+                  }
                 </select>
-
             </label>
             <br/>
-            <label>
-                Status:
-                <br/>
-                <input type="text" value="Programado"
-                  name="status" enable="false" readOnly="true"/>
-            </label>
-            <br/>
-            <label>
-              Detail:
-                <br/>
-                <input type="text" value={this.state.detail}
-                  name="detail" onChange={this.handleChange}/>
-            </label>
-            <br/><br/>
             <input id="submit" type="submit" value="Enviar"/>
           </form>
           {this.state.error  && <Error msg={this.state.error}/>}

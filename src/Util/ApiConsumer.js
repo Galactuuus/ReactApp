@@ -59,14 +59,30 @@ const ApiConsumer = {
             }
         });
         response = await response.json();
+        return response;
+    },
+    createDating: async (date, userId, doctorId) => {
+        console.log(date);
+        const userData = {
+            date: date,
+            userID: userId,
+            doctorID: doctorId,
+        }   
+        let response = await fetch('http://127.0.0.1:5000/datings', {
+        method: 'POST',
+        body: JSON.stringify({
+            date: date,
+            userID: userId,
+            doctorID: doctorId
+        }),
+        headers:{'Content-Type': 'application/json'}
+        })
+        console.log(response);
+        if(response.ok) return response;
     },
     listDoctors: async () => {
-        const token = Cookies.get('auth');
         let response = await fetch('http://127.0.0.1:5000/doctors', {
             method: 'GET',
-            headers: {
-                'auth': token
-            }
         });
         response = await response.json();
         return response;
@@ -80,7 +96,7 @@ const ApiConsumer = {
             }),
             headers:{'Content-Type': 'application/json'}
         });
-    response = await response.json();
+        response = await response.json();
         return response;
     }
 }
