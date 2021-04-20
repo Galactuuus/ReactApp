@@ -80,14 +80,13 @@ class NewDating extends Component {
             <label>
                 Doctor id:
                 <br/>
-                <select name="cars" id="cars">
-  
-                {this.state.doctorID.map((doc)=>{
-                  return(
-                    <option value={doc.id}>{doc.name}</option>
-                  )
-                })}
-                </select>
+                <select name="doctorID" onChange={this.handleChange} >
+                  {this.state.doctorID.map((doc)=>{
+                    return(
+                      <option value={doc.id}>{doc.name}</option>
+                    )
+                  })}
+                </select >
 
             </label>
             <br/>
