@@ -1,12 +1,10 @@
 import './NewDating.scss';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import Error from '../Error/Error.js';
 import ApiConsumer from '../../Util/ApiConsumer.js';
 import {withRouter} from "react-router-dom";
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
-
-
 
 class NewDating extends Component {
   constructor(props){
@@ -15,10 +13,18 @@ class NewDating extends Component {
       error:"",
       date:"",
       userID:"",
-      doctorID:"",
-      status: "",
+      doctorID:[],
+      status: "Programado",
       detail: ""
     }
+  }
+
+  async componentDidMount() {
+
+    let docArray = [];   
+    docArray = await ApiConsumer.listDoctors();
+    console.log(docArray)
+    this.setState({ doctorID: docArray});  
   }
   handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,15 +80,22 @@ class NewDating extends Component {
             <label>
                 Doctor id:
                 <br/>
-                <input type="text" value={this.state.doctorID}
-                  name="doctorID" onChange={this.handleChange}/>
+                <select name="cars" id="cars">
+  
+                {this.state.doctorID.map((doc)=>{
+                  return(
+                    <option value={doc.id}>{doc.name}</option>
+                  )
+                })}
+                </select>
+
             </label>
             <br/>
             <label>
                 Status:
                 <br/>
-                <input type="text" value={this.state.status}
-                  name="status" onChange={this.handleChange}/>
+                <input type="text" value="Programado"
+                  name="status" enable="false" readOnly="true"/>
             </label>
             <br/>
             <label>
