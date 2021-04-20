@@ -59,7 +59,6 @@ const ApiConsumer = {
             }
         });
         response = await response.json();
-        return response;
     },
     listDoctors: async () => {
         const token = Cookies.get('auth');
@@ -81,7 +80,7 @@ const ApiConsumer = {
             }),
             headers:{'Content-Type': 'application/json'}
         });
-        response = await response.json();
+    response = await response.json();
         return response;
     }
 }
