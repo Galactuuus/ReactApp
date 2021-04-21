@@ -9,6 +9,7 @@ const UserDating = () => {
   let [citas, setCitas] = useState([]);
   let [cancelledDating, setCancelledDating] = useState(false)
   let citasProgramadas = [];
+  let doctor = "";
   
   useEffect(async () => {
     
@@ -33,7 +34,7 @@ const UserDating = () => {
   return (
     <>
       <Header/>
-      <span className="titulo">User Dating</span>
+      <div className="titulo">Citas Usuario</div>
       {citas.map((cita)=>{
         return (<SingleDating 
           id={cita.id}

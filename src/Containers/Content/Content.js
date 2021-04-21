@@ -7,9 +7,9 @@ import {ImageRoutes} from '../../Components/ImageRoutes/ImageRoutes.js';
 const Content = () => {
 
     return (
-        <>
+        <div className="main">
             <Carrousel slides= {ImageRoutes} />
-        </>
+        </div>
     );
 }       
      

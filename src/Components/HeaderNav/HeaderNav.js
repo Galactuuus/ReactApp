@@ -48,7 +48,7 @@ const HeaderNav = () => {
                 {navAdmin && nav[0]}
                 {!navAdmin && nav[1]}
             </div>
-            <div>
+            <div className="logout">
                 <button onClick={logout}>Logout</button>
             </div>            
         </div>

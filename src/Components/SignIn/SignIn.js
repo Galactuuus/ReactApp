@@ -4,6 +4,7 @@ import Error from '../Error/Error.js';
 import ApiConsumer from '../../Util/ApiConsumer.js';
 import { Link, withRouter } from 'react-router-dom';
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 class SignIn extends Component {
   constructor(props){
@@ -49,7 +50,7 @@ class SignIn extends Component {
         <div className="formContainer"> 
           {this.state.error  && <Error msg={this.state.error}/>}       
           <form className="loginForm" onSubmit={this.handleSubmit}>
-            <label>Login</label>
+            <label>Identicarse</label>
             <br/>
             <label>
                 Dni:
@@ -59,16 +60,18 @@ class SignIn extends Component {
             </label>
             <br/>
             <label>
-                Phone:
+                Telefono:
                 <br/>
                 <input type="text" value={this.state.phone}
                   name="phone" onChange={this.handleChange}/>
             </label>   
             <br/>       
             <input id="submit" type="submit" value="Enviar"/>
-            <h4 className="registerinsingin">¿Estas registrado? Si no lo estás <Link to="/signup"> regístrate</Link></h4>
+            <h4 className="registerinsingin">¿Estas registrado?</h4>
+            <Link to="/signup">Regístrate</Link>
           </form>
         </div>
+        <Footer/>
       </>
     )  
   }

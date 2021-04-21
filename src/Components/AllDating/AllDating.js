@@ -26,7 +26,7 @@ const AllDating = () => {
   return (
     <>
       <Header/>
-      <span className="titulo">All Dating</span>  
+      <div className="titulo">Todas las citas</div>  
       {citas.map((cita)=>{ 
         return (<SingleDating 
           id={cita.id}
