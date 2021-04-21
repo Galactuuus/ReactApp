@@ -3,11 +3,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: rgb(40, 40, 40);
+    background-color: #45AAE0;
     align-items: center;
 }
 .singleDate {
-    border: 2px solid aqua;
+    border: 2px solid gold;
     background-color: white;
     border-radius: 2em;
     padding: 1em;
@@ -15,14 +15,14 @@
     display: flex;
     flex-direction: column;
     align-items:center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 .fields {
     width: 100%;
     display: flex;
+    margin-bottom: 2em;
     flex-direction: row;
-    align-items: stretch;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 .titulo{
     font-weight: bolder;
@@ -35,4 +35,19 @@
         align-items: stretch;
         justify-content: space-around;
     }
+}
+
+.cancelBtn{
+    border: 1px solid gold;
+    background-color: white;
+    width: 5em;
+    height: 2em;
+    border-radius: 2em;
+    transition: 1s ease;
+}
+
+.cancelBtn:hover {
+    transition: 1s ease;
+    background-color: gold;
+    box-shadow: inset 4px 4px 15px 0px #000000;
 }

@@ -62,10 +62,10 @@ class NewDating extends Component {
       <Header/>
         <div className="formContainer">        
           <form className="datingForm" onSubmit={this.handleSubmit}>
-            <label>New date</label>
+            <label>Nueva Fecha</label>
             <br/>
             <label>
-                Date:
+                Fecha:
                 <br/>
                 <input type="date" value={this.state.date}
                   name="date" onChange={(e) => this.setState({date: e.target.value})}/>

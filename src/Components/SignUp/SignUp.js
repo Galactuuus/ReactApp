@@ -4,6 +4,7 @@ import Error from '../Error/Error.js';
 import ApiConsumer from '../../Util/ApiConsumer.js';
 import { Link,withRouter, useHistory } from 'react-router-dom';
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 
 class SignUp extends Component {
@@ -53,7 +54,7 @@ class SignUp extends Component {
         <div className="formContainer"> 
           {this.state.error  && <Error msg={this.state.error}/>}       
           <form className="loginForm" onSubmit={this.handleSubmit}>
-            <label>SingUp</label>
+            <label>Registrarse</label>
             <br/>
             <label>
                 Dni:
@@ -63,37 +64,32 @@ class SignUp extends Component {
             </label>
             <br/>
             <label>
-                Phone:
+                Telefono:
                 <br/>
                 <input type="text" value={this.state.phone}
                   name="phone" onChange={this.handleChange}/>
             </label>
             <br/>
             <label>
-                name:
+                Nombre:
                 <br/>
                 <input type="text" value={this.state.name}
                   name="name" onChange={this.handleChange}/>
             </label>
             <br/>
             <label>
-                lastname:
+                Apellido:
                 <br/>
                 <input type="text" value={this.state.lastname}
                   name="lastname" onChange={this.handleChange}/>
             </label>
             <br/>
-            <label>
-                history:
-                <br/>
-                <input type="text" value={this.state.history}
-                  name="history" onChange={this.handleChange}/>
-            </label>
-            <br/>
             <input id="submit" type="submit" value="Enviar"/>
-            <h4 className="registerinsingin">¿Estas registrado? Si ya lo estás <Link to="/signin"> identifícate</Link></h4>
+            <h4 className="registerinsingin">¿Estas registrado?</h4>
+            <Link to="/signin">Identifícate</Link>
           </form>
         </div>
+        <Footer/>
       </>
     )  
   }
