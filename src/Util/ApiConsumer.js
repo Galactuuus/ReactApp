@@ -79,7 +79,6 @@ const ApiConsumer = {
             method: 'GET',
         });
         response = await response.json();
-        console.log(response);
         return response;
     },
     cancel: async (id) => {

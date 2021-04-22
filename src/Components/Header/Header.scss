@@ -1,10 +1,8 @@
 .header{
-    top: 0;
-    width: 100%;
+    width: 100vw;
     height: 4em;
-    position: sticky;
     display: flex;
-    background-color: #45AAE0;
+    background-color: gold;
     color: goldenrod;
     flex-direction: row;
     justify-content: space-between;
@@ -25,7 +23,8 @@ img{
 }
 
 .signin {
-    border: 2px solid gold;
+    box-shadow: 5px 5px 2.5px 0px rgba(0,0,0,0.75);
+    border: 2px solid black;
     border-radius: 2em;
     background-color: white;
     outline-style: none;
@@ -35,7 +34,8 @@ img{
 }
 
 .signup {
-    border: 2px solid gold;
+    box-shadow: 5px 5px 2.5px 0px rgba(0,0,0,0.75);
+    border: 2px solid black;
     border-radius: 2em;
     background-color: white;
     outline-style: none;
@@ -46,10 +46,16 @@ img{
 
 .signin:hover{
     transition: 1s ease;
+    cursor: pointer;
+    box-shadow: none;
+    border: 2px solid black;
     background-color: gold;
 }
 
 .signup:hover{
     transition: 1s ease;
+    cursor: pointer;
+    box-shadow: none;
+    border: 2px solid black;
     background-color: gold;
 }

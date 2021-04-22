@@ -6,23 +6,19 @@
     align-items: center;
   }  
   .image {
-    width: 90vh;
+    width: 100%;
     height: 60vh;
     border-radius: 10px;
   }
   
   .main{
-    width: 100%;
     height: 100vh;
-    background-image: url(https://image.freepik.com/foto-gratis/herramientas-sanas-equipo-dental-cuidado-dental-concepto-dental-profesional_36325-1433.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    background-color: #303030;
   }
   .right-arrow {
     position: absolute;
     top: 55%;
-    left: 90%;
+    left: 80%;
     font-size: 3rem;
     color: #000;
     z-index: 1;
@@ -33,7 +29,7 @@
   .left-arrow {
     position: absolute;
     top: 55%;
-    right: 90%;
+    right: 80%;
     font-size: 3rem;
     color: #000;
     z-index: 1;
@@ -47,6 +43,7 @@
   }
   
   .slide.active {
+    width: 90%;
     opacity: 1;
     transition-duration: 1s;
     transform: scale(1.08);

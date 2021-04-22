@@ -5,11 +5,11 @@ import Content from '../Content/Content.js'
 
 function Home() {
   return (
-    <>
+    <div className="app">
         <Header></Header>
         <Content></Content>
         <Footer></Footer>
-    </>
+    </div>
   );
 }
 

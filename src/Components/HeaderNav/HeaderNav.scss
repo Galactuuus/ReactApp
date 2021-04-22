@@ -1,11 +1,14 @@
 .contenedorNavegacion{
-    height: 100%;
+    width: 85%;
+    height: 4em;
+    background-color: gold;
     display: flex;
     flex-direction: row;
     align-items:center;
     justify-content:space-between;
 }
 .barraNavegacion{
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -29,21 +32,49 @@
 }
 .linksNav:hover{
     transition: 1s ease;
-    color: rgb(255, 234, 0);
+    text-shadow: 2px 2px 2px black;
 }
 .enlace:hover{
     transition: 1s ease;
-    color: rgb(255, 234, 0);
+    text-shadow: 2px 2px 2px black;
 }
 
-.logout button{
-    border: none;
-    height: 4em;
-    width: 4em;
-    background-color: #45AAE0;
-    border-radius: 2em;
-    cursor: pointer;
+.logout{
     outline-style: none;
-    font-size: 1em;
-    margin-right:  2em;
+    border: none;
+    background: none;
+}
+
+@media (max-width: 650px) {
+    .linksNav{
+        font-size: 0.8em;
+    }
+    .iconLogout{
+        transition: 1s ease;
+        width: 2em;
+        height: 2em;
+    }
+
+}
+
+@media (max-width: 500px){
+    .linksNav{
+        font-size: 0.5em;
+    }
+    .iconLogout{
+        transition: 1s ease;
+        width: 1.5em;
+        height: 1.5em;
+    }
+}
+
+@media(max-width: 325px){
+    .linksNav{
+        font-size: 0.4em;
+    }
+    .iconLogout{
+        transition: 1s ease;
+        width: 1em;
+        height: 1em;
+    }
 }

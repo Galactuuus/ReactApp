@@ -8,7 +8,7 @@ const Content = () => {
 
     return (
         <div className="main">
-            <Carrousel slides= {ImageRoutes} />
+            <Carrousel slides={ImageRoutes} />
         </div>
     );
 }       
