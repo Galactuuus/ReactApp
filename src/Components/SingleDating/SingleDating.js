@@ -17,7 +17,7 @@ function SingleDating(props) {
                 <div className="fields" >
                     <div className="title">
                         <label>
-                            Fecha: <div className="data"><label>{props.date}</label></div>
+                            Fecha: <div className="data"><label>{props.date.slice(0, 10)}</label></div>
                         </label>
                     </div>
                     <div className="title">
