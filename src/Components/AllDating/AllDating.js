@@ -4,14 +4,17 @@ import ApiConsumer from '../../Util/ApiConsumer.js';
 import Header from '../Header/Header.js';
 import Footer from '../Footer/Footer';
 import { useEffect, useState } from 'react';
-
+import Cookies from 'js-cookie';
+import { useHistory } from "react-router";
 
 const AllDating = () => {
-
+  const history = useHistory();
   let [citas, setCitas] = useState([]);
   let [cancelledDating, setCancelledDating] = useState(false);
 
-  useEffect(async () => {
+  useEffect(async () => {    
+    const token = Cookies.get('auth');
+    if(!token) history.push( '/')
     let response = await ApiConsumer.allDating();
     setCitas(response);
   },[])

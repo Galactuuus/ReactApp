@@ -4,14 +4,19 @@ import ApiConsumer from '../../Util/ApiConsumer.js';
 import { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import Cookies from 'js-cookie';
+import { useHistory } from "react-router";
 
 const UserDating = () => {
+  const history = useHistory();
   let [citas, setCitas] = useState([]);
   let [cancelledDating, setCancelledDating] = useState(false)
   let citasPrecargadas = [];
   let citasProgramadas = [];
   
   useEffect(async () => {
+    const token = Cookies.get('auth');
+    if(!token) history.push( '/')
     citas = await ApiConsumer.userDating();
     citas.map(cita => {
       if(cita.status === 'Programada') citasPrecargadas.push(cita);

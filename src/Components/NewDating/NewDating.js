@@ -5,6 +5,7 @@ import ApiConsumer from '../../Util/ApiConsumer.js';
 import {withRouter} from "react-router-dom";
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import Cookies from 'js-cookie';
 
 class NewDating extends Component {
   constructor(props){
@@ -23,6 +24,8 @@ class NewDating extends Component {
 
   async componentDidMount() {
     let docArray = [];   
+    const token = Cookies.get('auth');
+    if(!token) this.props.history.push( '/')
     docArray = await ApiConsumer.listDoctors();
     this.setState({ doctorArray: docArray}); 
   }
