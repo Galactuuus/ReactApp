@@ -53,12 +53,7 @@ class NewDating extends Component {
         }            
     }
   };
-
-  getDni = async () => {
-    let response = await ApiConsumer.validation();
-    this.setState({ userID: response.dni })
-  }
-
+  
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value});
   };

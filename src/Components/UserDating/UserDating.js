@@ -36,18 +36,20 @@ const UserDating = () => {
   return (
     <>
       <Header/>
-      <div className="titulo">Citas Usuario</div>
-      {citas.map((cita)=>{
-        return (<SingleDating 
-          id={cita.id}
-          date={cita.date}
-          dni= {cita.userID} 
-          doctorID= {cita.doctorID}
-          status= {cita.status}
-          detail= {cita.detail}
-          setCancelledDating={setCancelledDating}
-        />);
-      })}
+      <div className="userDating">
+        <div className="titulo">Citas Usuario</div>
+        {citas.map((cita)=>{
+          return (<SingleDating 
+            id={cita.id}
+            date={cita.date}
+            dni= {cita.userID} 
+            doctorID= {cita.doctorID}
+            status= {cita.status}
+            detail= {cita.detail}
+            setCancelledDating={setCancelledDating}
+          />);
+        })}
+      </div>
       <Footer/>
     </>
   );

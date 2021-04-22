@@ -11,7 +11,7 @@ function SingleDating(props) {
     return(
         <div className="datingContainer" key={props.id}>   
         <br/>
-            <div className="singleDate">
+            <div className="singleDate" key={props.id}>
                 <label>Cita # {props.id}</label>
                 <br/>
                 <div className="fields" >
