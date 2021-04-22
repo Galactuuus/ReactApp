@@ -50,7 +50,7 @@ const ApiConsumer = {
         response = await response.json();
         return response;
     },
-    adminValidation: async () => {
+    validation: async () => {
         const token = Cookies.get('auth');
         let response = await fetch('http://127.0.0.1:5000/users/profile', {
             method: 'GET',
@@ -61,12 +61,7 @@ const ApiConsumer = {
         response = await response.json();
         return response;
     },
-    createDating: async (date, userId, doctorId) => {
-        const userData = {
-            date: date,
-            userID: userId,
-            doctorID: doctorId,
-        }   
+    createDating: async (date, userId, doctorId) => {   
         let response = await fetch('http://127.0.0.1:5000/datings', {
         method: 'POST',
         body: JSON.stringify({
@@ -84,6 +79,7 @@ const ApiConsumer = {
             method: 'GET',
         });
         response = await response.json();
+        console.log(response);
         return response;
     },
     cancel: async (id) => {

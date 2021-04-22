@@ -9,16 +9,16 @@ import { useEffect, useState } from 'react';
 const AllDating = () => {
 
   let [citas, setCitas] = useState([]);
-  let [cancelledDating, setCancelledDating] = useState(false)
+  let [cancelledDating, setCancelledDating] = useState(false);
 
   useEffect(async () => {
-    citas = await ApiConsumer.allDating();
-    setCitas(citas);
+    let response = await ApiConsumer.allDating();
+    setCitas(response);
   },[])
   
   useEffect(async () => {
-    citas = await ApiConsumer.allDating();
-    setCitas(citas);
+    let response = await ApiConsumer.allDating();
+    setCitas(response);
     setCancelledDating(false);
   }, [cancelledDating])
   

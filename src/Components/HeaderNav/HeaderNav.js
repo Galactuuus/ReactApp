@@ -37,7 +37,7 @@ const HeaderNav = () => {
     ];
 
     useEffect(async () => {
-        let response = await ApiConsumer.adminValidation();
+        let response = await ApiConsumer.validation();
         if(response.role === 'admin') setNavAdmin(true);
         else setNavAdmin(false);
     }, []);

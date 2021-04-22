@@ -12,7 +12,7 @@ class NewDating extends Component {
     this.state = {
       error:"",
       date:"",
-      userID:"",
+      userID: "",
       doctorArray:[],
       status: "Programada",
       detail: "",
@@ -29,10 +29,12 @@ class NewDating extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let response= await ApiConsumer.createDating(
+      let userData = await ApiConsumer.validation();
+      this.setState({ userID: userData.dni })
+      let response = await ApiConsumer.createDating(
           this.state.date, 
           this.state.userID,
-          this.state.doctorID);
+          this.state.doctorID + 1);
       if (response.error){
           this.setState({ error: response.error });  
       }else{
@@ -48,6 +50,11 @@ class NewDating extends Component {
         }            
     }
   };
+
+  getDni = async () => {
+    let response = await ApiConsumer.validation();
+    this.setState({ userID: response.dni })
+  }
 
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value});
@@ -68,14 +75,7 @@ class NewDating extends Component {
                 Fecha:
                 <br/>
                 <input type="date" value={this.state.date}
-                  name="date" onChange={(e) => this.setState({date: e.target.value})}/>
-            </label>
-            <br/>
-            <label>
-                Dni:
-                <br/>
-                <input type="text" value={this.state.userID}
-                  name="userID" onChange={this.handleChange}/>
+                  name="date" onChange={(e) => this.setState({date: e.target.value})} required={true}/>
             </label>
             <br/>
             <label>
