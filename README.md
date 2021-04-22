@@ -1,21 +1,21 @@
-# Clinica_Dental_Front_End
+# Clínica_Dental_Front_End
 
 ### Introducción:
-Aplicación React de la gestión de una Clínica Dental que utiliza datos de una API que usa **EXPRESS** y **Sequelize** para gestionar las funciones de SQL
+Aplicación React de la gestión de una Clínica Dental, que utiliza datos de una API que usa **EXPRESS** y **Sequelize** para gestionar las funciones de SQL
 
 ### Funcionalidades:
 
 ### SignIn
 
-- Envía dni y teléfono por cabecera al API y si corresponden con algún registro de la base de datos recibimos un json web token y nos redirige a la vista Home.
-- En caso de datos incorrectos muestra el error de datos incorrectos.
+- Envía DNI y teléfono por cabecera al API y si corresponden con algún registro de la base de datos recibimos un json web token y nos redirige a la vista Home.
+- En caso de no coincidir con la base de datos muestra el error de datos incorrectos.
 - En caso de fallo de conexión se muestra el error correspondiente.
 
 ### SignUp
 
 - Envía datos por body al API y si los campos son correctos se produce una inserción en la base de datos y nos redirige a la vista de SingIn.
-- En caso de enviar un dni repetido se nos indica el error de dni duplicado.
-- En caso de cualquier otro error se nos muestra el error genérico.
+- En caso de enviar un DNI repetido, nos indica el error de DNI duplicado.
+- En caso de cualquier otro error nos muestra el error genérico.
 
 ### Mis citas
 
@@ -34,4 +34,4 @@ Aplicación React de la gestión de una Clínica Dental que utiliza datos de una
 
 - **Node.js**: Entorno de ejecución de JavaScript
 - **Dotenv**: Gestión de variables de entorno
-- **React**: libreria para gestión parte visual
+- **React**: Librería para gestión parte visual
