@@ -10,7 +10,8 @@ import { useHistory } from "react-router";
 const UserDating = () => {
   const history = useHistory();
   let [citas, setCitas] = useState([]);
-  let [cancelledDating, setCancelledDating] = useState(false)
+  let [cancelledDating, setCancelledDating] = useState(false);
+  let [vacio, setVacio] = useState(false);
   let citasPrecargadas = [];
   let citasProgramadas = [];
   
@@ -25,6 +26,15 @@ const UserDating = () => {
   },[])
 
   useEffect(async () => {
+    let todasCitas = await ApiConsumer.userDating();
+    let sinCitas = true;
+    todasCitas.map(cita => {
+      if(cita.status === 'Programada') sinCitas=false;
+    })
+    setVacio(sinCitas)
+  },[citas])
+
+  useEffect(async () => {
     citas = await ApiConsumer.userDating();
     citas.map(cita => {
       if(cita.status === 'Programada') citasProgramadas.push(cita);
@@ -36,6 +46,7 @@ const UserDating = () => {
   return (
     <>
       <Header/>
+<<<<<<< HEAD
       <div className="userDating">
         <div className="titulo">Citas Usuario</div>
         {citas.map((cita)=>{
@@ -50,6 +61,21 @@ const UserDating = () => {
           />);
         })}
       </div>
+=======
+      <div className="titulo">Citas Usuario</div>
+      {citas.map((cita)=>{
+        return (<SingleDating 
+          id={cita.id}
+          date={cita.date}
+          dni= {cita.userID} 
+          doctorID= {cita.doctorID}
+          status= {cita.status}
+          detail= {cita.detail}
+          setCancelledDating={setCancelledDating}
+        />);
+      })}
+      {vacio && <div>No hay citas programadas</div>}
+>>>>>>> 8635643b526c881699e107f129c17af6509c15b9
       <Footer/>
     </>
   );

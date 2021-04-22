@@ -10,7 +10,8 @@ import { useHistory } from "react-router";
 const AllDating = () => {
   const history = useHistory();
   let [citas, setCitas] = useState([]);
-  let [cancelledDating, setCancelledDating] = useState(false);
+  let [cancelledDating, setCancelledDating] = useState(false); 
+  let [vacio, setVacio] = useState(false);
 
   useEffect(async () => {    
     const token = Cookies.get('auth');
@@ -18,6 +19,15 @@ const AllDating = () => {
     let response = await ApiConsumer.allDating();
     setCitas(response);
   },[])
+
+  useEffect(async () => {
+    let todasCitas = await ApiConsumer.allDating();
+    let sinCitas = true;
+    todasCitas.map(cita => {
+      if(cita.status === 'Programada') sinCitas=false;
+    })
+    setVacio(sinCitas)
+  },[citas])
   
   useEffect(async () => {
     let response = await ApiConsumer.allDating();
@@ -29,6 +39,7 @@ const AllDating = () => {
   return (
     <>
       <Header/>
+<<<<<<< HEAD
       <div className="allDating">
         <div className="titulo">Todas las citas</div>  
         {citas.map((cita)=>{ 
@@ -43,6 +54,21 @@ const AllDating = () => {
           />);
         })}
       </div>
+=======
+      <div className="titulo">Todas las citas</div>  
+      {citas.map((cita)=>{ 
+        return (<SingleDating 
+          id={cita.id}
+          date={cita.date}
+          dni= {cita.userID} 
+          doctorID= {cita.doctorID}
+          status= {cita.status}
+          detail= {cita.detail}
+          setCancelledDating={setCancelledDating}
+        />);
+      })}
+      {vacio && <div>No hay citas programadas</div>}
+>>>>>>> 8635643b526c881699e107f129c17af6509c15b9
       <Footer/>
     </>
   );
