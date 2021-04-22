@@ -10,7 +10,8 @@ import { useHistory } from "react-router";
 const UserDating = () => {
   const history = useHistory();
   let [citas, setCitas] = useState([]);
-  let [cancelledDating, setCancelledDating] = useState(false)
+  let [cancelledDating, setCancelledDating] = useState(false);
+  let [vacio, setVacio] = useState(false);
   let citasPrecargadas = [];
   let citasProgramadas = [];
   
@@ -23,6 +24,15 @@ const UserDating = () => {
     })
     setCitas(citasPrecargadas);
   },[])
+
+  useEffect(async () => {
+    let todasCitas = await ApiConsumer.userDating();
+    let sinCitas = true;
+    todasCitas.map(cita => {
+      if(cita.status === 'Programada') sinCitas=false;
+    })
+    setVacio(sinCitas)
+  },[citas])
 
   useEffect(async () => {
     citas = await ApiConsumer.userDating();
@@ -48,6 +58,7 @@ const UserDating = () => {
           setCancelledDating={setCancelledDating}
         />);
       })}
+      {vacio && <div>No hay citas programadas</div>}
       <Footer/>
     </>
   );
