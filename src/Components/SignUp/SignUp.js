@@ -60,28 +60,28 @@ class SignUp extends Component {
                 Dni:
                 <br/>
                 <input type="text" value={this.state.dni}
-                  name="dni" onChange={this.handleChange}/>
+                  name="dni" onChange={this.handleChange} required={true}/>
             </label>
             <br/>
             <label>
                 Telefono:
                 <br/>
-                <input type="text" value={this.state.phone}
-                  name="phone" onChange={this.handleChange}/>
+                <input type="number" value={this.state.phone}
+                  name="phone" onChange={this.handleChange} required={true}/>
             </label>
             <br/>
             <label>
                 Nombre:
                 <br/>
                 <input type="text" value={this.state.name}
-                  name="name" onChange={this.handleChange}/>
+                  name="name" onChange={this.handleChange} required={true}/>
             </label>
             <br/>
             <label>
                 Apellido:
                 <br/>
                 <input type="text" value={this.state.lastname}
-                  name="lastname" onChange={this.handleChange}/>
+                  name="lastname" onChange={this.handleChange} required={true}/>
             </label>
             <br/>
             <input id="submit" type="submit" value="Enviar"/>
