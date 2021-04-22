@@ -8,21 +8,18 @@ import Footer from '../Footer/Footer';
 const UserDating = () => {
   let [citas, setCitas] = useState([]);
   let [cancelledDating, setCancelledDating] = useState(false)
+  let citasPrecargadas = [];
   let citasProgramadas = [];
-  let doctor = "";
   
   useEffect(async () => {
-    
     citas = await ApiConsumer.userDating();
     citas.map(cita => {
-      if(cita.status === 'Programada') citasProgramadas.push(cita);
+      if(cita.status === 'Programada') citasPrecargadas.push(cita);
     })
-    setCitas(citasProgramadas);
-
+    setCitas(citasPrecargadas);
   },[])
 
   useEffect(async () => {
-    
     citas = await ApiConsumer.userDating();
     citas.map(cita => {
       if(cita.status === 'Programada') citasProgramadas.push(cita);
