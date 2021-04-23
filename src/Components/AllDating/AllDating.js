@@ -13,13 +13,31 @@ const AllDating = () => {
   let [cancelledDating, setCancelledDating] = useState(false); 
   let [vacio, setVacio] = useState(false);
   let citasCanceladas = [];
+  let citasPrecargadas = [];
+  let doctoresNombres = [];
 
   useEffect(async () => {    
     const token = Cookies.get('auth');
     if(!token) history.push( '/')
     let response = await ApiConsumer.allDating();
+    let doctores = await ApiConsumer.listDoctors();
+    doctores.map(e => doctoresNombres.push(e));
     if (response === false) setVacio(true);
-    else setCitas(response);
+    else{
+      response.map(cita => {
+        if(cita.status === 'Programada'){
+          doctores.map(doctor => {
+        
+            if(cita.doctorID === doctor.id) { 
+              cita.doctorID = doctor.name;
+              citasPrecargadas.push(cita);
+            };
+          })
+        }   
+      })
+      setCitas(citasPrecargadas);
+    }
+    setCitas(response);
   },[])
   
   useEffect(async () => {

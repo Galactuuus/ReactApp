@@ -12,6 +12,8 @@ const UserDating = () => {
   let [citas, setCitas] = useState([]);
   let [cancelledDating, setCancelledDating] = useState(false);
   let [vacio, setVacio] = useState(false);
+  let doctoresID = [];
+  let doctoresNombres = [];
   let citasPrecargadas = [];
   let citasProgramadas = [];
   let citasCanceladas = [];
@@ -20,10 +22,20 @@ const UserDating = () => {
     const token = Cookies.get('auth');
     if(!token) history.push('/')
     let response = await ApiConsumer.userDating();
+    let doctores = await ApiConsumer.listDoctors();
+    doctores.map(e => doctoresNombres.push(e));
     if (response === false) setVacio(true);
     else{
       response.map(cita => {
-        if(cita.status === 'Programada') citasPrecargadas.push(cita);
+        if(cita.status === 'Programada'){
+          doctores.map(doctor => {
+        
+            if(cita.doctorID === doctor.id) { 
+              cita.doctorID = doctor.name;
+              citasPrecargadas.push(cita);
+            };
+          })
+        }   
       })
       setCitas(citasPrecargadas);
     }

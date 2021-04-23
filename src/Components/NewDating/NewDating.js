@@ -32,12 +32,13 @@ class NewDating extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      if(this.state.doctorID === 0) this.setState({ doctorID: 1 })
       let userData = await ApiConsumer.validation();
       this.setState({ userID: userData.dni })
       let response = await ApiConsumer.createDating(
           this.state.date, 
           this.state.userID,
-          this.state.doctorID + 1);
+          this.state.doctorID);
       if (response.error){
           this.setState({ error: response.error });  
       }else{
