@@ -4,7 +4,7 @@ import ApiConsumer from '../../Util/ApiConsumer.js';
 import { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import Cookies from 'js-cookie';
+import Cookies, { set } from 'js-cookie';
 import { useHistory } from "react-router";
 
 const UserDating = () => {
@@ -14,33 +14,32 @@ const UserDating = () => {
   let [vacio, setVacio] = useState(false);
   let citasPrecargadas = [];
   let citasProgramadas = [];
+  let citasCanceladas = [];
   
   useEffect(async () => {
     const token = Cookies.get('auth');
-    if(!token) history.push( '/')
-    citas = await ApiConsumer.userDating();
-    citas.map(cita => {
-      if(cita.status === 'Programada') citasPrecargadas.push(cita);
-    })
-    setCitas(citasPrecargadas);
+    if(!token) history.push('/')
+    let response = await ApiConsumer.userDating();
+    if (response === false) setVacio(true);
+    else{
+      response.map(cita => {
+        if(cita.status === 'Programada') citasPrecargadas.push(cita);
+      })
+      setCitas(citasPrecargadas);
+    }
   },[])
 
   useEffect(async () => {
-    let todasCitas = await ApiConsumer.userDating();
-    let sinCitas = true;
-    todasCitas.map(cita => {
-      if(cita.status === 'Programada') sinCitas=false;
-    })
-    setVacio(sinCitas)
-  },[citas])
-
-  useEffect(async () => {
-    citas = await ApiConsumer.userDating();
-    citas.map(cita => {
+    let response = await ApiConsumer.userDating();
+    response.map(cita => {
       if(cita.status === 'Programada') citasProgramadas.push(cita);
+      if(cita.status === 'Cancelada') citasCanceladas.push(cita);
     })
-    setCitas(citasProgramadas);
-    setCancelledDating(false); 
+    if(citasCanceladas.length === response.length) setVacio(true)
+    else{
+      setCitas(citasProgramadas);
+    }
+    setCancelledDating(false);
   },[cancelledDating])
 
   return (
@@ -48,7 +47,7 @@ const UserDating = () => {
       <Header/>
       <div className="userDating">
         <div className="titulo">Citas Usuario</div>
-        {citas.map((cita)=>{
+        {!vacio && citas.map((cita)=>{
           return (<SingleDating 
             id={cita.id}
             date={cita.date}
@@ -59,6 +58,7 @@ const UserDating = () => {
             setCancelledDating={setCancelledDating}
           />);
         })}
+        {vacio && <div className="noDates"><h1>No tienes ninguna cita ahora mismo</h1></div>}
       </div>
       <Footer/>
     </>

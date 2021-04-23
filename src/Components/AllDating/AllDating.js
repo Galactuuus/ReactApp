@@ -12,26 +12,23 @@ const AllDating = () => {
   let [citas, setCitas] = useState([]);
   let [cancelledDating, setCancelledDating] = useState(false); 
   let [vacio, setVacio] = useState(false);
+  let citasCanceladas = [];
 
   useEffect(async () => {    
     const token = Cookies.get('auth');
     if(!token) history.push( '/')
     let response = await ApiConsumer.allDating();
-    setCitas(response);
+    if (response === false) setVacio(true);
+    else setCitas(response);
   },[])
-
-  useEffect(async () => {
-    let todasCitas = await ApiConsumer.allDating();
-    let sinCitas = true;
-    todasCitas.map(cita => {
-      if(cita.status === 'Programada') sinCitas=false;
-    })
-    setVacio(sinCitas)
-  },[citas])
   
   useEffect(async () => {
     let response = await ApiConsumer.allDating();
-    setCitas(response);
+    response.map(cita => {
+      if(cita.status === 'Cancelada') citasCanceladas.push(cita);
+    })
+    if(citasCanceladas.length === response.length) setVacio(true)
+    else setCitas(response);
     setCancelledDating(false);
   }, [cancelledDating])
   
@@ -41,7 +38,7 @@ const AllDating = () => {
       <Header/>
       <div className="allDating">
         <div className="titulo">Todas las citas</div>  
-        {citas.map((cita)=>{ 
+        {!vacio && citas.map((cita)=>{ 
           return (<SingleDating 
             id={cita.id}
             date={cita.date}
@@ -52,6 +49,7 @@ const AllDating = () => {
             setCancelledDating={setCancelledDating}
           />);
         })}
+        {vacio && <div className="noDates"><h1>No hay ninguna cita ahora mismo</h1></div>}
       </div>
       <Footer/>
     </>

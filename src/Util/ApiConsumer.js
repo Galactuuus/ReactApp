@@ -35,6 +35,7 @@ const ApiConsumer = {
                 'auth': token
             }
         });
+        if(response.status === 404) return false;
         response = await response.json();
         return response;
     },
@@ -47,6 +48,7 @@ const ApiConsumer = {
                 'auth': token
             }
         });
+        if(response.status === 404) return false;
         response = await response.json();
         return response;
     },
